@@ -1,0 +1,8 @@
+.DS_Store
+bin/
+data/
+dist/
+logs/
+test-result/
+tmp/
+modules/
