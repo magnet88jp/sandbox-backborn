@@ -1,0 +1,4 @@
+Account(admin):
+    email:          admin@scalam.jp
+    password:       secret
+    fullname:       admin
