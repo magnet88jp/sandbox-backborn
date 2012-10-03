@@ -11,6 +11,11 @@ GET     /favicon.ico                            404
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
+# for backbone
+GET     /api/sentences                          Sentences.json
+POST    /api/sentences                          Sentences.create
+POST    /api/sentences/{id}                     Sentences.save
+
 # Import CRUD routes
 *       /admin                                  module:crud
 

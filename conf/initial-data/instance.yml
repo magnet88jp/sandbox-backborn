@@ -11,3 +11,6 @@ Entry(hoge):
     title:          hoge
     content:        fuga
 
+Sentence(hoge):
+    name:           hoge
+    email:          hoge@fuga.com
