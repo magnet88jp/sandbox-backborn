@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BackboneSyncSample</title>
+    </head>
+    <body>
+        <h1>BackboneSyncSample</h1>
+        <div id="main"></div>
+
+        <script id="entry-template" type="text/template">
+            <h2><%- title %></h2>
+            <div><%- content %></div>
+            <div><%- id %></div>
+        </script>
+
+        <script type="text/javascript" src="@{'/public/javascripts/jquery-1.6.4.min.js'}"></script>
+        <script type="text/javascript" src="@{'/public/javascripts/underscore-min.js'}"></script>
+        <script type="text/javascript" src="@{'/public/javascripts/backbone-min.js'}"></script>
+
+        <script type="text/javascript">
+            var Entry = Backbone.Model.extend({
+                defaults: {
+                    title: "",
+                    content: ""
+                },
+                initialize: function(){
+                	localStorage.clear();
+                }
+            });
+
+            var Blog = Backbone.Collection.extend({
+                model: Entry,
+                url: "/entrys/json"
+            });
+
+            var EntryView = Backbone.View.extend({
+                template: _.template($("#entry-template").html()),
+                render: function() {
+                    var json = this.model.toJSON();
+                    var html = this.template(json);
+                    $(this.el).html(html);
+                    return this;
+                }
+            });
+
+            var BlogView = Backbone.View.extend({
+                el: $("#main"),
+                render: function() {
+                    $(this.el).empty();
+                    this.model.each(function(entry) {
+                        var view = new EntryView({ model:entry });
+                        view.render();
+                        $(this.el).append(view.el);
+                    }, this);
+                    return this;
+                }
+            });
+/*
+            // オリジナルの sync をコピー
+            var originalSync = Backbone.sync;
+            // Backbone.sync をオーバライド
+            Backbone.sync = function(method, model, options) {
+                if (method === "read") {
+                    // 通信に成功したとき用のコールバック関数をコピー
+                    var originalSuccess = options.success;
+
+                    // ローカルストレージからキャッシュを取得
+                    // キーは URL
+                    var cache = localStorage.getItem(model.url);
+                    if (cache) {
+                        // キャッシュが存在したら成功用コールバックを呼び出す
+                        originalSuccess(JSON.parse(cache));
+                    } else {
+                        // レスポンスをローカルストレージに保存するように、
+                        // 成功用コールバックを上書き
+                        options.success = function(collection) {
+                            localStorage.setItem(model.url, JSON.stringify(collection));
+                            originalSuccess(collection);
+                        };
+                        // キャッシュが存在しなかったらオリジナルの sync を呼び出す
+                        originalSync(method, model, options);
+                    }
+                } else {
+                    // read 以外はオリジナルの sync で処理する
+                    originalSync(method, model, options);
+                }
+            };
+*/
+            window.App = new BlogView({ model: new Blog() });
+            window.App.model.fetch({
+                success: function(collection, resp) {
+                    window.App.render();
+                }
+            });
+
+        </script>
+    </body>
+</html>

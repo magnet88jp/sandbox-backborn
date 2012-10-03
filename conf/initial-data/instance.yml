@@ -2,3 +2,12 @@ Account(admin):
     email:          admin@scalam.jp
     password:       secret
     fullname:       admin
+
+Entry(foo):
+    title:          foo
+    content:        bar
+
+Entry(hoge):
+    title:          hoge
+    content:        fuga
+
