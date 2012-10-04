@@ -14,7 +14,7 @@ GET     /public/                                staticDir:public
 # for backbone
 GET     /api/sentences                          Sentences.json
 POST    /api/sentences                          Sentences.create
-POST    /api/sentences/{id}                     Sentences.save
+PUT     /api/sentences/{id}                     Sentences.jsonSave
 
 # Import CRUD routes
 *       /admin                                  module:crud
