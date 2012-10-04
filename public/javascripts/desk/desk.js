@@ -7,7 +7,8 @@ var Sentence = Backbone.Model.extend({
 		}, wait: true});
 	}, url: function() {
 		alert("debug3:" + this.id);
-		return '/api/sentences/' + this.id;
+//		return '/api/sentences/' + this.id;
+		return (this.id) ? '/api/sentences/' + this.id : '/api/sentences';
 	}
 });
 // ユーザCollectionを定義
