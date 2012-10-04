@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BackboneSyncTest</title>
+    <script type="text/javascript" src="@{'/public/javascripts/jquery-1.6.4.min.js'}"></script>
+        <script type="text/javascript" src="@{'/public/javascripts/underscore-min.js'}"></script>
+        <script type="text/javascript" src="@{'/public/javascripts/backbone-min.js'}"></script>
+
+  <script type="text/javascript" charset="${_response_encoding}" src="@{'/public/javascripts/jquery-1.6.4.min.js'}" ></script>
+  <script type="text/javascript" charset="${_response_encoding}" src="@{'/public/javascripts/underscore-min.js'}"></script>
+  <script type="text/javascript" charset="${_response_encoding}" src="@{'/public/javascripts/backbone-min.js'}"></script>
+</head>
+<body>
+  <h1>test</h1>
+
+  <div id="sentenceapp">
+    <input type="text" id="new-name" />
+    <input type="text" id="new-email" />
+    <table id="sentence"><tbody id="sentence-list"></tbody></table>
+  </div>
+
+<script type="text/template" id="sentence-template">
+  <td class="view">
+		<span><%= name %></span>
+		<input type="text" name="name" value="<%= name %>" class="edit">
+	</td>
+	<td class="view">
+		<span><%= email %></span>
+		<input type="text" name="email" value="<%= email %>" class="edit">
+		<a class="destroy"></a>
+	</td>
+</script>  
+
+<script type="text/javascript" charset="${_response_encoding}" src="@{'/public/javascripts/desk/desk.js'}"></script>
+
+</body>
+</html>
